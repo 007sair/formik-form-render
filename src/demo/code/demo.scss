@@ -1,0 +1,25 @@
+/**
+ * 页面演示样式，与组件库无关
+ */
+
+.demo-panel {
+  display: flex;
+  > div {
+    flex: 1;
+  }
+  > .form {
+    .actions {
+      padding-left: 30%;
+      button:not(.bp3-button) {
+        padding: 3px 10px;
+      }
+    }
+  }
+  > .code {
+    pre {
+      margin: 0 0 0 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+  }
+}

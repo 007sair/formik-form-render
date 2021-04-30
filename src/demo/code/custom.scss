@@ -1,0 +1,132 @@
+/**
+ * 自定义样式
+ */
+
+$prefix-cls: 'jdv'; // 样式前缀名，与 Renderer 组件的 prefixcls 属性保持一致
+$field: $prefix-cls + '-field'; // 单个节点div的样式名
+$field-label: $field + '-label'; // 节点左侧文本样式名
+$field-component: $field + '-component'; // 节点右侧组件的样式名
+
+.#{$prefix-cls} {
+  // 每个表单控件
+  &-field {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 14px;
+
+    // 控件文字部分
+    &-label {
+      width: 30%;
+    }
+
+    // 控件组件部分
+    &-component {
+      flex: 1;
+
+      input[type='text'],
+      input[type='textarea'],
+      input[type='password'] {
+        width: 100%;
+        margin: 0;
+        padding: 0 7px;
+        border: 1px solid #999;
+        font-size: 14px;
+        border-radius: 2px;
+        height: 32px;
+      }
+
+      input[type='number'] {
+        margin: 0;
+        padding: 7px;
+        border: 1px solid #999;
+        font-size: 14px;
+        border-radius: 2px;
+        height: 32px;
+      }
+
+      input[type='checkbox'] {
+        margin: 0;
+        border: 1px solid #999;
+        width: 1.25em;
+        height: 1.25em;
+        vertical-align: top;
+      }
+
+      input[type='radio'] {
+        margin: 0;
+      }
+
+      select {
+        height: 32px;
+      }
+    }
+
+    // type="text"
+    &_text,
+    &_number {
+      .#{$field-label} {
+        padding-top: 7px;
+      }
+    }
+
+    &_switch {
+      padding: 5px 0;
+    }
+
+    &_select {
+      .#{$field-label} {
+        padding-top: 6px;
+      }
+    }
+
+    &_radio {
+      padding: 6px 0;
+      .#{$field-component} {
+        > div {
+          display: inline-block;
+          vertical-align: top;
+          margin-right: 20px;
+          input,
+          label {
+            display: inline-block;
+            vertical-align: middle;
+          }
+          input {
+            width: 16px;
+            height: 16px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+
+    &_array {
+      .item {
+        margin: 10px 0;
+        border: 1px solid #999;
+        .head {
+          margin: 0 10px;
+          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid #e2e2e2;
+          .head-action {
+            button {
+              margin-left: 1px;
+            }
+          }
+        }
+        .content {
+          margin-top: 10px;
+          padding: 10px;
+        }
+      }
+    }
+
+    .field-error {
+      color: red;
+    }
+  }
+}
