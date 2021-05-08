@@ -19,8 +19,8 @@ type BaseMapping = typeof nodeMapping;
  */
 export interface RendererProps<C, V> {
   /**
-   * 表单配置项，详细API：[NodeConfig](/api/config#api-nodeconfig) <br/>
-   * 关于泛型`T`：可选，使用三方库时必须传入，否则无法识别配置项中的类型。详情参考[三方库Demo](/demo/blueprint)。
+   * 表单配置项，详细API：[NodeConfig](/formik-form-render/api/config#api-nodeconfig) <br/>
+   * 关于泛型`T`：可选，使用三方库时必须传入，否则无法识别配置项中的类型。详情参考[三方库Demo](/formik-form-render/demo/blueprint)。
    * @type NodeConfig<T> | NodeConfig<T>[];
    */
   config: NodeConfig<C> | NodeConfig<C>[];
@@ -42,7 +42,7 @@ export interface RendererProps<C, V> {
   render?: (props: RendererRenderParam<V>) => JSX.Element;
 
   /**
-   * 样式前缀，自定义样式时使用，参考[自定义样式demo](/demo/custom-style)
+   * 样式前缀，自定义样式时使用，参考[自定义样式demo](/formik-form-render/demo/custom-style)
    * @default "ffr"
    */
   prefixcls?: string;
@@ -85,7 +85,7 @@ export interface RendererProps<C, V> {
 export interface BaseNodeConfig<U extends keyof T, T> {
   /**
    * 节点类型，库自身定义了一些默认类型，见右侧。<br/>
-   * 扩展（或覆盖）其他类型请参考：[三方库Demo](/demo/blueprint)
+   * 扩展（或覆盖）其他类型请参考：[三方库Demo](/formik-form-render/demo/blueprint)
    */
   type: U;
 
@@ -107,7 +107,7 @@ export interface BaseNodeConfig<U extends keyof T, T> {
   /**
    * 节点组件的具体属性。该类型使用联合类型声明，使用`type`字段区分各组件类型。<br/>
    * 当使用自定义组件时，需要在`NodeConfig`中传入自定义组件映射的类型。 <br/>
-   * 具体可参考：[三方库Demo](/demo/blueprint) <br/>
+   * 具体可参考：[三方库Demo](/formik-form-render/demo/blueprint) <br/>
    * 类型可以为函数，参考[NodeFuncParam](#api-nodefuncparam)
    * @type object | (param: NodeFuncParam) => object
    */
