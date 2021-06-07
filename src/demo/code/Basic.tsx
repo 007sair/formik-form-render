@@ -19,12 +19,20 @@ export default () => {
       name: 'gender',
       label: '性别',
       props: {
+        options: ['male', 'female'],
+        placeholder: '请选择下拉项...',
+      },
+    },
+    {
+      type: 'radio',
+      name: 'gender',
+      label: '性别',
+      props: {
         options: [
           { label: '男性', value: 'male' },
           { label: '女性', value: 'female' },
           { label: '其他', value: 'other' },
         ],
-        placeholder: '请选择下拉项...',
       },
     },
   ];

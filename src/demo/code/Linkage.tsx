@@ -10,13 +10,6 @@ const rate = {
   GBP: { zhCN: '英镑', rate: 0.1108 },
 };
 
-const options = Object.keys(rate).map(key => {
-  return {
-    label: rate[key].zhCN,
-    value: key,
-  };
-});
-
 /**
  * 汇率计算
  * @param currency 转换币种
@@ -29,31 +22,46 @@ const getExchangeAmount = (currency: Currency, amount: number) => {
   return amount * (rate[currency].rate || 1);
 };
 
+const options = Object.keys(rate).map(key => {
+  return { label: rate[key].zhCN, value: key };
+});
+
+const otherCurrency = (currency: Currency): NodeConfig => {
+  return {
+    type: 'text',
+    name: currency,
+    label: rate[currency].zhCN,
+    props: ({ parentValue }) => {
+      return {
+        useFastField: false,
+        readOnly: true,
+        value: getExchangeAmount(currency, parentValue.CNY),
+      };
+    },
+  };
+};
+
 export default () => {
   const initValues = {
     currency: 'CNY',
-    amount: 0,
-    exchange_amount: 0,
+    CNY: 0,
+    exchanged: 0,
+    GBP: '',
+    EUR: '',
     more: '',
-    gbp: '',
-    eur: '',
   };
 
   const config: NodeConfig[] = [
     {
       type: 'text',
-      name: 'amount',
-      label: () => (
-        <>
-          Before<small>(人民币)</small>
-        </>
-      ),
+      name: 'CNY',
+      label: '人民币',
       default: 0,
       props: { type: 'number' },
       validate: (val: any) => (val >= 0 ? undefined : '不能为负数哦~'),
       onChange({ value, parentValue, setValue }) {
         const amount = getExchangeAmount(parentValue.currency, value);
-        setValue('exchange_amount', amount);
+        setValue('exchanged', amount);
       },
     },
     {
@@ -63,12 +71,12 @@ export default () => {
       default: 'CNY',
       props: { options },
       onChange({ value, parentValue, setValue }) {
-        setValue('exchange_amount', getExchangeAmount(value, parentValue.amount));
+        setValue('exchanged', getExchangeAmount(value, parentValue.CNY));
       },
     },
     {
       type: 'text',
-      name: 'exchange_amount',
+      name: 'exchanged',
       default: 0,
       props: {
         type: 'text',
@@ -89,30 +97,7 @@ export default () => {
       type: 'fragment',
       name: '',
       show: ({ parentValue }) => parentValue.more,
-      children: [
-        {
-          type: 'component',
-          name: 'gbp',
-          label: '英镑',
-          props: ({ parentValue }) => {
-            const val = getExchangeAmount('GBP', parentValue.amount);
-            return {
-              render: <input value={val} onChange={() => {}} readOnly />,
-            };
-          },
-        },
-        {
-          type: 'component',
-          name: 'eur',
-          label: '欧元',
-          props: ({ parentValue }) => {
-            const val = getExchangeAmount('EUR', parentValue.amount);
-            return {
-              render: <input value={val} onChange={() => {}} readOnly />,
-            };
-          },
-        },
-      ],
+      children: [otherCurrency('GBP'), otherCurrency('EUR')],
     },
   ];
 

@@ -59,6 +59,7 @@ $field-component: $field + '-component'; // 节点右侧组件的样式名
 
       select {
         height: 32px;
+        padding-right: 10px;
       }
     }
 
@@ -126,6 +127,7 @@ $field-component: $field + '-component'; // 节点右侧组件的样式名
     }
 
     .field-error {
+      margin-top: 2px;
       color: red;
     }
   }

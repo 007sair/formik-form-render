@@ -11,7 +11,7 @@ const Input = withField<InputProps & React.InputHTMLAttributes<any>>(props => {
   return (
     <>
       <input type="text" {...field} {...attr} />
-      <div className="field-error">{meta.error && meta.touched ? meta.error : null}</div>
+      {meta.error && meta.touched ? <div className="field-error">{meta.error}</div> : null}
     </>
   );
 });

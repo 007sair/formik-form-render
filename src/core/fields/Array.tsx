@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import { withField } from '../withField';
 
 interface ItemProps {
-  item: any;
+  array: any[];
   actions: ReactNode;
   //子项索引
   index: number;
@@ -38,7 +38,7 @@ const CustomArray = withField<ICustomTabs>(node => {
 
   return (
     <>
-      {actions.includes('add') && (
+      {actions.includes('add') ? (
         <button
           onClick={() => {
             if (!arrValue) {
@@ -52,7 +52,9 @@ const CustomArray = withField<ICustomTabs>(node => {
         >
           新增
         </button>
-      )}
+      ) : headExtra ? (
+        headExtra(arrValue, push)
+      ) : null}
       {React.Children.map(node.children, (child, index) => {
         const item = fieldValue[index];
         const actionNode = (
@@ -113,7 +115,7 @@ const CustomArray = withField<ICustomTabs>(node => {
           </div>
         ) : (
           renderItem({
-            item,
+            array: field.value,
             index,
             actions: actionNode,
             child,

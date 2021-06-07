@@ -37,7 +37,7 @@ export interface RendererProps<C, V> {
 
   /**
    * 渲染表单函数。在需要将表单添加到特定场景 或 需要使用 formik 对象时可以使用。<br/>
-   * 函数参数api见
+   * 函数参数见文档：[RendererRenderParam](#api-rendererrenderparam)
    */
   render?: (props: RendererRenderParam<V>) => JSX.Element;
 
@@ -90,7 +90,7 @@ export interface BaseNodeConfig<U extends keyof T, T> {
   type: U;
 
   /**
-   * 节点数据的key字段，值有以下几种:
+   * 节点数据的key字段，在整体结构中会被自动连接。连接方式有以下几种:
    * - `"a"`：普通标识。表示对象中key为`a`的数据。
    * - `""`：空值。在做数据提升、异构时会被用到，会自动连接上下节点。
    * - `"../a"`、'"../../a/b"'：相对路径。将当前节点提升至上层。数据与UI异构时会用到。
@@ -105,22 +105,22 @@ export interface BaseNodeConfig<U extends keyof T, T> {
   label?: React.ReactNode | ((param: NodeFuncParam) => React.ReactNode);
 
   /**
-   * 节点组件的具体属性。该类型使用联合类型声明，使用`type`字段区分各组件类型。<br/>
-   * 当使用自定义组件时，需要在`NodeConfig`中传入自定义组件映射的类型。 <br/>
-   * 具体可参考：[三方库Demo](/formik-form-render/demo/blueprint) <br/>
+   * 当前节点中`type`字段对应的组件props类型。当使用自定义组件时，需要在`NodeConfig`中传入自定义组件映射的类型。
+   * 具体可参考：[三方库Demo](/formik-form-render/demo/blueprint)
    * 类型可以为函数，参考[NodeFuncParam](#api-nodefuncparam)
-   * @type object | (param: NodeFuncParam) => object
+   * @type ComponentProps | (param: NodeFuncParam) => ComponentProps
    */
   props?: GetNodeProps<T[U]> | ((param: NodeFuncParam) => GetNodeProps<T[U]>);
 
   /**
    * 子节点
+   * @type NodeConfig[]
    */
   children?: NodeConfig<T>[];
 
   /**
-   * 节点默认值。设置的默认值可以通过`getDefaultValues`函数获取到，并传入`Renderer`组件中进行使用。<br/>
-   * Tips：如果当前节点设置了children,此节点是不会set默认值的。
+   * 节点默认值。作用是当业务仅提供了config，未提供values时，可通过函数`getDefaultValues`获取config中预设好的default值。
+   * ⚠️ 如果节点包含`children`字段，是不会set默认值的。
    */
   default?: unknown;
 
@@ -181,7 +181,7 @@ export type NodeFuncParam = {
 /**
  * `Renderer`组件的子组件函数参数声明
  */
-export interface RendererRenderParam<V> {
+export interface RendererRenderParam<V = any> {
   /**
    * 表单元素
    */

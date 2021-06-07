@@ -39,7 +39,17 @@ export default () => {
       values={initValues}
       config={config}
       onSubmit={onSubmit}
-      formikProps={{ validateOnBlur: true }}
+      formikProps={{
+        validateOnBlur: true,
+        // 第2种校验方式
+        validate: values => {
+          const errors: any = {};
+          if (values.userName && values.userName.length >= 10) {
+            errors.userName = '字符长度超过10个';
+          }
+          return errors;
+        },
+      }}
       prefixcls="jdv"
       render={({ form, formik }) => {
         return (

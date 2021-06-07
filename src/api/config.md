@@ -10,28 +10,27 @@ order: 1
 
 ## 使用方法
 
-````tsx | pure
-import Renderer, { NodeConfig } from 'formik-form-render';
-
-/**
- * Renderer组件的`config`属性。
- * - 使用typescript时，类型为: NodeConfig | NodeConfig[]
- * - 使用自定义组件，还需要传入自定义组件的类型，使用方法：
- * ```tsx
- * const mapping = {}
- * const config: NodeConfig<typeof mapping> = {};
- * ```
- */
-const config: NodeConfig = {
-  type: 'text',
-  name: 'firstName',
-  label: 'FirstName',
-};
+```tsx | pure
+import Renderer from 'formik-form-render';
 
 export default () => {
-  return <Renderer {...props} config={config} />;
+  return (
+    <Renderer
+      values={{ firstName: '' }}
+      config={[
+        {
+          type: 'text', // 使用 `text` 类型对应的组件，如库自带的是 input 组件
+          name: 'firstName', // 数据中存在一个 firstName 的字段
+          label: 'FirstName', // 表单左侧的文本，即 label 标签
+        },
+      ]}
+      onSubmit={values => {
+        alert(values);
+      }}
+    />
+  );
 };
-````
+```
 
 ## API
 

@@ -37,7 +37,7 @@ export interface ISwitch {
  */
 export const Switch = withField<ISwitch>(props => {
   /**
-   * 使用 withField 包裹后，props会携带除bp、useCheckbox外的其他表单API
+   * 使用 withField 包裹后，props会携带用于操作表单的api，如: field, form 等等
    */
   const { bp, useCheckbox, field, form } = props;
   const Comp = useCheckbox ? Checkbox : BPSwitch;

@@ -1,13 +1,10 @@
 import React from 'react';
 import { withField } from '../withField';
-
-interface IOption {
-  label: string;
-  value: string | number;
-}
+import { Option } from './fieldType';
+import { s2o } from './tool';
 
 export interface ISelect {
-  options: IOption[];
+  options: (Option | string)[];
   placeholder?: string;
 }
 
@@ -16,7 +13,7 @@ export default withField<ISelect>(props => {
   return (
     <select {...field}>
       {placeholder ? <option value="">{placeholder}</option> : null}
-      {options.map(({ label, value }) => (
+      {s2o(options).map(({ label, value }) => (
         <option key={label} value={value}>
           {label}
         </option>

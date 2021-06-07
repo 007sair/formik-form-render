@@ -22,8 +22,6 @@ export const Select = withField<SelectProps>(props => {
   const _options = options ? options : children2option(children);
   const activeOption = _options.find(option => option.value === field.value);
 
-  console.log(_options);
-
   return (
     <Popover2
       position={Position.BOTTOM}

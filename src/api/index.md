@@ -6,43 +6,34 @@ toc: menu
 order: 0
 ---
 
-该库的入口组件，接收`config`、`values`、`onSubmit`等 [props](#api)属性。
+表单渲染组件，接收`config`、`values`、`onSubmit`等 [RendererProps](#api-rendererprops) 属性。
 
 ## 使用方法
 
-调用方式有两种：
-
-**方式 1：**
+调用方式有如下两种：
 
 ```tsx | pure
 import Renderer from 'formik-form-render';
 
+// 方式1：直接调用，组件返回的就是表单内容
 export default () => {
-  // 直接调用，组件返回的就是表单内容
-  return <Renderer {...props} />;
+  return <Renderer {...someProps} />;
+};
+
+// 方式2：`render props` 用法
+export default () => {
+  /**
+   * 使用 `render` 函数，该函数提供的参数包含两个属性：form 和 formik：
+   * - form 可以将表单内容更灵活的插入到任何地方
+   * - formik 可以获取表单的内部状态
+   */
+  return <Renderer {...someProps} render={props => <>{props.form}</>} />;
 };
 ```
 
-**方式 2：**
+## API
 
-```tsx | pure
-import Renderer from 'formik-form-render';
-
-export default () => {
-  return (
-    <Renderer
-      {...props}
-      render={props => {
-        // props.form: 表单内容，是一个 ReactNode，可以被放置在任意位置
-        // props.formik: 表单内部状态，可以做其他操作，如：获取校验状态、预览表单数据等
-        return <>{props.form}</>;
-      }}
-    />
-  );
-};
-```
-
-<API src="../core/Renderer.tsx" desc="> `Renderer`组件" ></API>
+<API src="./tsx/index.tsx" exports='["RendererProps"]' desc="> `Renderer`组件中的`props`" ></API>
 
 <API src="./tsx/index.tsx" exports='["RendererRenderParam"]' desc="> `Renderer`组件中的`render函数`" ></API>
 

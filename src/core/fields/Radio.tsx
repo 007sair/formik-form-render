@@ -1,20 +1,17 @@
 import React from 'react';
 import { withField } from '../withField';
-
-interface IOption {
-  label: string;
-  value: string | number;
-}
+import { Option } from './fieldType';
+import { s2o } from './tool';
 
 export interface IRadio {
-  options: IOption[];
+  options: (Option | string)[];
 }
 
 export default withField<IRadio>(props => {
   const { field, form, options } = props;
   return (
     <>
-      {options.map(({ label, value }) => {
+      {s2o(options).map(({ label, value }) => {
         const id = [field.name, label].join('-');
         return (
           <div key={id}>
