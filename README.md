@@ -33,14 +33,8 @@ export default () => {
 };
 ```
 
-## 特性
+## Changes
 
-- [x] 表单联动
-- [x] 三方模板
-- [x] 校验
-- [x] 表单异构
-- [x] 状态提升
-- [x] 动态内容
-- [x] 自定义组件
-- [x] 自动提交
-- [x] 自定义样式
+**`0.3.3`**
+
+移除了`NodeCustomProps`类型中的`defaultValues`，自定义组件的 props 中不再接受`defaultValues`，详细信息见 [array](https://github.com/007sair/formik-form-render/blob/main/src/core/fields/Array.tsx)

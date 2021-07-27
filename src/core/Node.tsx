@@ -25,7 +25,7 @@ function renderChildren(props: NodeProps) {
 function Node(props: NodeProps) {
   const { parentName, node } = props;
   const { values, setFieldValue, status, isValid } = useFormikContext();
-  const { mapping, prefixcls, defaultValues, syncWithData }: IFormikStatus = status;
+  const { mapping, prefixcls, syncWithData }: IFormikStatus = status;
   const fullyName = resolveName(parentName, node.name); // 当前节点的完整name
   const isArrayNode = /\[\]$/g.test(node.name); // 当前节点是数组节点
   const comps = { ...nodeMapping, ...mapping };
@@ -61,7 +61,6 @@ function Node(props: NodeProps) {
   const nodeCustomProps = useMemo(() => {
     const _props: NodeCustomProps = {
       name: fullyName,
-      defaultValues,
       ...(isFunction(node.props) ? node.props(params) : node.props),
     };
     if (isFunction(node.validate)) {
@@ -72,7 +71,7 @@ function Node(props: NodeProps) {
       }
     }
     return _props;
-  }, [fullyName, node, params, defaultValues]);
+  }, [fullyName, node, params]);
 
   useEffect(() => {
     // form验证通过 且 值发生了变化

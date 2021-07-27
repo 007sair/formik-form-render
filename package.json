@@ -1,6 +1,6 @@
 {
   "name": "formik-form-render",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",

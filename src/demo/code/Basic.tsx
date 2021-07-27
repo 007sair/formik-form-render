@@ -37,15 +37,14 @@ export default () => {
     },
   ];
 
-  const onSubmit = values => {
-    alert(JSON.stringify(values, null, 2));
-  };
-
   return (
     <Renderer
       values={initValues}
       config={config}
-      onSubmit={onSubmit}
+      onSubmit={values => {
+        // type values.xxx
+        alert(JSON.stringify(values, null, 2));
+      }}
       render={({ form, formik }) => {
         return (
           <div className="demo-panel">

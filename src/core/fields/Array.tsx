@@ -27,12 +27,12 @@ export interface ICustomTabs {
 }
 
 const CustomArray = withField<ICustomTabs>(node => {
-  const { field, onDelete, headExtra, onBeforeAdd, onAdd, onSwap, renderItem, itemTitle } = node;
+  const { field, onDelete, headExtra, onBeforeAdd, onAdd, onSwap, renderItem, itemTitle, form } = node;
   const name = field.name;
   const fieldValue = field.value || [];
   const helpers = node.arrayHelpers as ArrayHelpers;
   const { push, insert, swap, remove } = helpers;
-  const arrValue = get(node.defaultValues, name);
+  const arrValue = get(form.status.defaultValues, name); // <== defaultValues 的获取方式
   const actions = node.actions || ['add', 'copy', 'up', 'down', 'delete'];
   const getItem = (old: any, action: Action) => (onBeforeAdd ? onBeforeAdd(old, action) : old);
 

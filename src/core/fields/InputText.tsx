@@ -7,7 +7,7 @@ export interface InputProps {
 }
 
 const Input = withField<InputProps & React.InputHTMLAttributes<any>>(props => {
-  const { field, meta, form, defaultValues, ...attr } = props;
+  const { field, meta, form, ...attr } = props;
   return (
     <>
       <input type="text" {...field} {...attr} />

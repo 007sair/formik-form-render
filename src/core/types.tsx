@@ -212,6 +212,11 @@ export type NodeProps = {
   parentName: string;
 };
 
+export type IFormikStatus = Pick<
+  RendererProps<BaseMapping, FormikValues>,
+  'defaultValues' | 'mapping' | 'prefixcls' | 'syncWithData'
+>;
+
 /**
  * 自定义组件的props类型声明。
  * 如果自定义组件不想使用`withField`包裹，可以这样使用：
@@ -227,15 +232,9 @@ export type NodeProps = {
  * ```
  */
 export interface NodeCustomProps extends Pick<FieldConfig, 'name' | 'validate'> {
-  defaultValues: any;
   arrayHelpers?: ArrayHelpers;
   children?: React.ReactNode;
 }
-
-export type IFormikStatus = Pick<
-  RendererProps<BaseMapping, FormikValues>,
-  'defaultValues' | 'mapping' | 'prefixcls' | 'syncWithData'
->;
 
 /**
  * 获取节点`props`属性的类型：

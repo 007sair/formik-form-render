@@ -50,7 +50,7 @@ export default () => {
         ],
       },
     },
-    { type: 'switch', name: 'married', label: '已婚', props: { useCheckbox: true } },
+    { type: 'switch', name: 'married', label: '已婚' },
     {
       type: 'collapse',
       name: 'info',
